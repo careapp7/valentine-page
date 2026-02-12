@@ -2,15 +2,26 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Recommend Page</title>
 
   <style>
-    html, body {
+    /* ▼ アプリ内ブラウザ向けのベース設定 */
+    html {
+      height: 100dvh; /* 動的な高さに対応 */
+      margin: 0;
+      background: #1a103c;
+      overscroll-behavior: none; /* バウンススクロール禁止 */
+    }
+    body {
       height: 100%;
       margin: 0;
-      /* アプリの背景色に合わせる */
       background: #1a103c;
+      /* アプリっぽくするための設定 */
+      -webkit-user-select: none; user-select: none; /* 文字選択禁止 */
+      -webkit-touch-callout: none; /* 長押しメニュー禁止 */
+      -webkit-tap-highlight-color: transparent; /* タップ時のグレー背景削除 */
+      overflow: hidden; /* スクロールは内部で行う */
     }
   </style>
 </head>
@@ -32,18 +43,20 @@
       font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
       color: var(--v-text);
 
-      /* ▼ 背景をフラットに変更（光の演出を削除） */
       background: var(--v-bg);
 
       position: relative;
       width: 100%;
       height: 100%;
-      min-height: 500px;
       margin: 0;
       overflow: hidden;
       isolation: isolate;
       display: flex;
       flex-direction: column;
+
+      /* ▼ iPhoneのノッチ・ホームバー対策 */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
 
       opacity: 0;
       transition: opacity .18s ease;
@@ -51,13 +64,14 @@
 
     #valentine-scope * {
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+      /* タップ反応速度の向上 */
+      touch-action: manipulation;
     }
 
     #valentine-scope .scroll-area {
       flex: 1;
       overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      -webkit-overflow-scrolling: touch; /* 慣性スクロール */
       padding: 20px 16px 80px;
     }
 
@@ -76,7 +90,6 @@
       font-weight: 700;
       margin:0;
       line-height:1.3;
-      /* ▼ グラデーション文字を廃止し、白単色に */
       color: #fff;
     }
 
@@ -114,12 +127,11 @@
     }
     #valentine-scope .bar > div {
       height:100%;
-      background: #fff; /* シンプルな白、またはアクセント色 */
+      background: #fff;
       transition: width .4s ease;
     }
 
     #valentine-scope .card {
-      /* ▼ すりガラスを弱め、アプリのUIパーツに近い質感に */
       border: none;
       background: transparent; 
       padding: 0; 
@@ -138,14 +150,11 @@
       display:flex;
       align-items:center;
       gap:12px;
-      
-      /* ▼ アプリの「プロフィール編集」ボタンに合わせてPill型・枠線スタイルに */
       border: 1px solid var(--v-accent1);
       background: rgba(124, 77, 255, 0.1);
       color: var(--v-text);
-      
       padding: 16px 20px;
-      border-radius: 999px; /* 丸みを強く */
+      border-radius: 999px;
       width: 100%;
       cursor:pointer;
       text-align:left;
@@ -154,22 +163,17 @@
       margin-bottom: 12px;
       transition: .2s;
     }
-    #valentine-scope .choiceBtn:hover {
-      background: rgba(124, 77, 255, 0.2);
-    }
-    #valentine-scope .dot {
-      width: 10px; height:10px;
-      border-radius: 50%;
-      background: var(--v-accent1);
-      flex-shrink: 0;
-      display: none; /* シンプルにするためドットは隠しても良いが、好みで表示 */
+    /* スマホ用にactiveを追加（タップした瞬間） */
+    #valentine-scope .choiceBtn:active {
+      background: rgba(124, 77, 255, 0.3);
+      transform: scale(0.98); /* 少し沈む感触 */
     }
 
     #valentine-scope .resultTitle {
       font-size: 20px;
       font-weight: 800;
       margin-bottom: 12px;
-      color: #fff; /* 単色 */
+      color: #fff;
     }
     #valentine-scope .resultBody {
       font-size: 14px;
@@ -181,7 +185,7 @@
 
     #valentine-scope .recCard {
       border: 1px solid rgba(255,255,255,0.1);
-      background: var(--v-card-bg); /* 少し明るい紺色 */
+      background: var(--v-card-bg);
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 12px;
@@ -204,7 +208,6 @@
     #valentine-scope .ctaBtn {
       display: inline-block;
       text-decoration: none;
-      /* アプリのボタン色に合わせる */
       background: var(--v-accent1);
       color: white;
       padding: 8px 16px;
@@ -214,12 +217,16 @@
       flex-shrink: 0;
       white-space: nowrap;
     }
+    #valentine-scope .ctaBtn:active {
+      transform: scale(0.95);
+    }
 
     #valentine-scope .bottomBar {
       position: absolute;
       left: 0; right: 0; bottom: 0;
       padding: 16px;
-      /* アプリのタブバーに近い濃い色 */
+      /* iPhoneの下線(Home Indicator)対応 */
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
       background: #150c30;
       border-top: 1px solid rgba(255,255,255,0.1);
       display: flex;
@@ -238,6 +245,7 @@
       font-size: 13px;
     }
     #valentine-scope .navBtn:disabled { opacity: 0.3; }
+    #valentine-scope .navBtn:active { background: rgba(255,255,255,0.2); }
 
     #valentine-scope .loadingCard{
       text-align: center;
@@ -288,7 +296,7 @@
       const RECS_CSV_URL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vRliKpYwepLa0Z1DzzqJtDtobsdZU1uthkjiVMmIF2zTplootZrK3hpxhsyeu7GEjI5e9Zxi2UdSpye/pub?gid=0&single=true&output=csv";
 
-      // ✅ results / settings（edit：共有が“リンク全員閲覧”必要）
+      // ✅ results / settings
       const RESULTS_CSV_URL =
         "https://docs.google.com/spreadsheets/d/1-iNODBXpVHuF8500kBHvuJJG7XrR_pBGt-8FmClDB5o/gviz/tq?tqx=out:csv&gid=257661142";
 
