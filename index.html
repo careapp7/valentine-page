@@ -3,25 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Valentine</title>
+  <title>Recommend Page</title>
+
+  <!-- ✅ ページ外側もアプリっぽい紫で埋めて“切り替わった感”を消す -->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #160b2f; /* 深い紫 */
+    }
+  </style>
 </head>
-<body style="margin:0">
+
+<body>
 
 <div id="valentine-scope">
   <style>
     #valentine-scope {
-      --v-bg: #0b1020;
-      --v-text: #eef2ff;
-      --v-muted: #b8c0dd;
-      --v-accent1: #ff66b2;
-      --v-accent2: #7c8cff;
+      /* ✅ 紫テーマ（アプリ寄せ） */
+      --v-bg: #160b2f;
+      --v-bg2: #0f0823;
+      --v-text: #f2efff;
+      --v-muted: rgba(242,239,255,.68);
+      --v-accent1: #a855f7;
+      --v-accent2: #7c3aed;
 
       font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
       color: var(--v-text);
       background:
-        radial-gradient(900px 520px at 20% 10%, rgba(255,102,178,.35) 0%, rgba(255,102,178,0) 60%),
-        radial-gradient(900px 520px at 80% 25%, rgba(124,140,255,.35) 0%, rgba(124,140,255,0) 55%),
-        linear-gradient(180deg, #0b1020 0%, #060a14 100%);
+        radial-gradient(900px 520px at 20% 10%, rgba(168,85,247,.35) 0%, rgba(168,85,247,0) 60%),
+        radial-gradient(900px 520px at 80% 25%, rgba(124,58,237,.35) 0%, rgba(124,58,237,0) 55%),
+        linear-gradient(180deg, var(--v-bg) 0%, var(--v-bg2) 100%);
 
       position: relative;
       width: 100%;
@@ -60,7 +72,7 @@
       font-weight: 700;
       margin:0;
       line-height:1.3;
-      background: linear-gradient(90deg, #fff, #b8c0dd);
+      background: linear-gradient(90deg, #fff, rgba(242,239,255,.7));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -69,17 +81,18 @@
       color: var(--v-muted);
       font-size: 12px;
       margin-top: 4px;
-      white-space: pre-line;
+      white-space: pre-line; /* \n を改行として表示 */
     }
 
     #valentine-scope .chip {
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      border:1px solid rgba(242,239,255,.14);
+      background: rgba(242,239,255,.06);
       border-radius: 999px;
       padding: 4px 8px;
       font-size: 10px;
       color: var(--v-muted);
       flex-shrink: 0;
+      display: inline-block;
     }
 
     #valentine-scope .stepRow {
@@ -92,19 +105,19 @@
     #valentine-scope .bar {
       height: 6px;
       border-radius: 999px;
-      background: rgba(255,255,255,.1);
+      background: rgba(242,239,255,.10);
       flex: 1;
       overflow: hidden;
     }
     #valentine-scope .bar > div {
       height:100%;
-      background: linear-gradient(90deg, #ff66b2, #7c8cff);
+      background: linear-gradient(90deg, var(--v-accent1), var(--v-accent2));
       transition: width .4s ease;
     }
 
     #valentine-scope .card {
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(30,41,59,.6), rgba(15,23,42,.4));
+      border: 1px solid rgba(242,239,255,.10);
+      background: linear-gradient(180deg, rgba(120, 60, 230, .18), rgba(20, 10, 50, .25));
       backdrop-filter: blur(12px);
       border-radius: 16px;
       padding: 16px;
@@ -122,8 +135,8 @@
       display:flex;
       align-items:center;
       gap:12px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
+      border:1px solid rgba(242,239,255,.10);
+      background: rgba(242,239,255,.04);
       color: var(--v-text);
       padding: 14px;
       border-radius: 12px;
@@ -135,12 +148,12 @@
       transition: .2s;
     }
     #valentine-scope .choiceBtn:hover {
-      background: rgba(255,255,255,.08);
+      background: rgba(242,239,255,.08);
     }
     #valentine-scope .dot {
       width: 8px; height:8px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ff66b2, #7c8cff);
+      background: linear-gradient(135deg, var(--v-accent1), var(--v-accent2));
       flex-shrink: 0;
     }
 
@@ -148,7 +161,7 @@
       font-size: 18px;
       font-weight: 800;
       margin-bottom: 10px;
-      background: linear-gradient(90deg, #ff9ecf, #aeb8ff);
+      background: linear-gradient(90deg, rgba(242,239,255,1), rgba(242,239,255,.65));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -158,9 +171,10 @@
       margin-bottom: 16px;
       white-space: pre-line;
     }
+
     #valentine-scope .recCard {
-      border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.05);
+      border:1px solid rgba(242,239,255,.10);
+      background: rgba(242,239,255,.05);
       border-radius: 12px;
       padding: 10px;
       margin-bottom: 8px;
@@ -169,22 +183,22 @@
       align-items: center;
     }
 
-    /* ✅ 丸アイコン */
+    /* ✅ 丸アイコン（見やすい） */
     #valentine-scope .avatar {
       width: 56px;
       height: 56px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.06);
+      background: rgba(242,239,255,0.06);
       object-fit: cover;
       object-position: center;
       flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(242,239,255,.12);
     }
 
     #valentine-scope .ctaBtn {
       display: inline-block;
       text-decoration: none;
-      background: linear-gradient(90deg, #ff66b2, #7c8cff);
+      background: linear-gradient(90deg, var(--v-accent1), var(--v-accent2));
       color: white;
       padding: 8px 12px;
       border-radius: 8px;
@@ -198,18 +212,19 @@
       position: absolute;
       left: 0; right: 0; bottom: 0;
       padding: 12px;
-      background: rgba(11, 16, 32, .95);
-      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(15, 8, 35, .92);
+      border-top: 1px solid rgba(242,239,255,.10);
       display: flex;
       gap: 10px;
       z-index: 10;
+      backdrop-filter: blur(10px);
     }
     #valentine-scope .navBtn {
       flex: 1;
       border-radius: 10px;
       padding: 10px;
-      border: 1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(242,239,255,.14);
+      background: rgba(242,239,255,.06);
       color: var(--v-text);
       cursor:pointer;
       font-weight: 600;
@@ -242,23 +257,30 @@
 
   <script>
     (function(){
-      // ✅ 設問（前の公開シート）
+      /* ==========================
+         ✅ ここがGSS URL（あなたのやつ）
+         ========================== */
+
+      // ✅ 設問（public: 2PACXのほう）
       const QUESTIONS_CSV_URL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vRliKpYwepLa0Z1DzzqJtDtobsdZU1uthkjiVMmIF2zTplootZrK3hpxhsyeu7GEjI5e9Zxi2UdSpye/pub?gid=1750400212&single=true&output=csv";
 
-      // ✅ 占い師（前の公開シート）
+      // ✅ 占い師（public: 2PACXのほう）
       const RECS_CSV_URL =
         "https://docs.google.com/spreadsheets/d/e/2PACX-1vRliKpYwepLa0Z1DzzqJtDtobsdZU1uthkjiVMmIF2zTplootZrK3hpxhsyeu7GEjI5e9Zxi2UdSpye/pub?gid=0&single=true&output=csv";
 
-      // ✅ results/settings（今回の editリンクのシート）
-      // ※ 共有設定が「リンクを知ってる全員が閲覧可」になってないと読めません
+      // ✅ results / settings（editのほう：共有が“リンク全員閲覧”になってる必要あり）
       const RESULTS_CSV_URL =
         "https://docs.google.com/spreadsheets/d/1-iNODBXpVHuF8500kBHvuJJG7XrR_pBGt-8FmClDB5o/gviz/tq?tqx=out:csv&gid=257661142";
 
       const SETTINGS_CSV_URL =
         "https://docs.google.com/spreadsheets/d/1-iNODBXpVHuF8500kBHvuJJG7XrR_pBGt-8FmClDB5o/gviz/tq?tqx=out:csv&gid=1350915999";
 
-      // 保険：読み込み失敗しても動く固定設問（5問）
+
+      /* ==========================
+         ✅ 保険（読めなくても動く）
+         ========================== */
+
       const fallbackQuestions = [
         { text: "バレンタイン当日、理想のムーブは？", choices: [{l:"ストレートに渡して、一言添える",s:{A:2}},{l:"軽いノリで渡して、反応を見る",s:{B:2}},{l:"当日は様子見。別日に渡したい",s:{C:2}}] },
         { text: "チョコを選ぶならどれ？", choices: [{l:"限定・新作・話題のやつ（勢い！）",s:{A:2}},{l:"上品で大人っぽい、ちょいビター系",s:{B:2}},{l:"定番の安心感。ミルク系でほっとする",s:{C:2}}] },
@@ -267,14 +289,12 @@
         { text: "渡すならどんな形がしっくりくる？", choices: [{l:"直接渡す！短くても言葉を添える",s:{A:2}},{l:"さりげなく。二人きりのタイミングで",s:{B:2}},{l:"手紙 or メモで気持ちを丁寧に伝える",s:{C:2}}] }
       ];
 
-      // 保険：結果文（読み込み失敗でも表示できる）
       let results = {
         A: { title: "攻めスイートタイプ 🍓", body: "好きになったら素直に行けるタイプ。恋は“流れ”より“一手”で動かすのが得意です。勢いのまま詰めすぎないのがポイント。", tip: "💡 おすすめの一手：『このあと少しだけ時間ある？』と軽い提案を。" },
         B: { title: "駆け引きビタータイプ ☕", body: "相手の温度感を読みながら、ちょうどいい距離に合わせられるタイプ。考えすぎて動けなくならないように注意。", tip: "💡 おすすめの一手：『会えたら渡したいものがある』と含みを持たせて。" },
-        C: { title: "じっくりミルクタイプ 🥛", body: "安心感と誠実さで距離を縮めるタイプ。相手の心を大切に扱えるのが魅力です。遠慮しすぎてチャンスを逃さないで。", tip: "💡 おすすめの一手：一言メモを添える。『いつもありがとう』だけで十分強い。" }
+        C: { title: "じっくりミルクタイプ 🥛", body: "安心感と誠実さで距離を縮めるタイプ。相手の心を大切に扱えるのが魅力です。遠慮しすぎてチャンスを逃さないで。", tip: "💡 おすすめの一手：一言メモを添える。『いつもありがとう』だけで十分強い。"}
       };
 
-      // 保険：固定テキスト
       let ui = {
         title: "Love Psychology 🍫",
         subtitle: "バレンタイン直前。\n今のあなたの「攻め方」診断",
@@ -284,11 +304,15 @@
         noQuestions: "設問がありません"
       };
 
-      // 状態
+
+      /* ==========================
+         ✅ 状態
+         ========================== */
+
       let questions = fallbackQuestions;
       let recs = { A: [], B: [], C: [] };
 
-      // 自然な戻る用（加点履歴）
+      // 自然な戻る（履歴でスコアを戻す）
       let state = { step: 0, score: { A:0, B:0, C:0 }, answers: [] };
 
       const app = document.getElementById("val-app");
@@ -302,10 +326,18 @@
       function applyUI(){
         uiTitle.textContent = ui.title || "";
         uiSubtitle.textContent = (ui.subtitle || "").replace(/\\n/g, "\n");
-        uiChip.textContent = ui.chip || "";
+
+        const chipText = (ui.chip || "").trim();
+        uiChip.textContent = chipText;
+        // ✅ chipが空ならチップ自体を消す（シームレス）
+        uiChip.style.display = chipText ? "inline-block" : "none";
       }
 
-      // CSVパーサ（引用符/改行対応）
+
+      /* ==========================
+         ✅ CSVユーティリティ
+         ========================== */
+
       function parseCSV(text){
         const rows = [];
         let row = [], cell = "", inQuotes = false;
@@ -346,6 +378,10 @@
         return { [t]: p };
       }
 
+
+      /* ==========================
+         ✅ 読み込み（questions）
+         ========================== */
       async function loadQuestionsFromSheet(){
         try{
           const res = await fetch(QUESTIONS_CSV_URL + "&ts=" + Date.now());
@@ -383,6 +419,10 @@
         }
       }
 
+
+      /* ==========================
+         ✅ 読み込み（recs）
+         ========================== */
       async function loadRecsFromSheet(){
         try{
           const res = await fetch(RECS_CSV_URL + "&ts=" + Date.now());
@@ -417,6 +457,10 @@
         }
       }
 
+
+      /* ==========================
+         ✅ 読み込み（results）
+         ========================== */
       async function loadResultsFromSheet(){
         try{
           const res = await fetch(RESULTS_CSV_URL + "&ts=" + Date.now());
@@ -447,6 +491,10 @@
         }
       }
 
+
+      /* ==========================
+         ✅ 読み込み（settings）
+         ========================== */
       async function loadSettingsFromSheet(){
         try{
           const res = await fetch(SETTINGS_CSV_URL + "&ts=" + Date.now());
@@ -460,11 +508,7 @@
             if(key) map[key] = value;
           });
 
-          ui = {
-            ...ui,
-            ...map
-          };
-
+          ui = { ...ui, ...map };
           applyUI();
           render();
         } catch(e){
@@ -472,6 +516,10 @@
         }
       }
 
+
+      /* ==========================
+         ✅ 画面描画
+         ========================== */
       function render(){
         backBtn.disabled = (state.step === 0);
 
@@ -479,7 +527,7 @@
           app.innerHTML = `
             <div class="card">
               <div class="q">${ui.noQuestions}</div>
-              <div style="font-size:12px;color:#b8c0dd;">GSSのquestionsシートを確認してね。</div>
+              <div style="font-size:12px;color:var(--v-muted);">GSSのquestionsシートを確認してね。</div>
             </div>`;
           return;
         }
@@ -491,7 +539,7 @@
           app.innerHTML = `
             <div class="card">
               <div class="stepRow">
-                <div style="font-size:12px;color:#b8c0dd">Q.${state.step+1}</div>
+                <div style="font-size:12px;color:var(--v-muted);">Q.${state.step+1}</div>
                 <div class="bar"><div style="width:${pct}%"></div></div>
               </div>
               <div class="q">${q.text}</div>
@@ -508,21 +556,21 @@
             <div class="card">
               <div class="resultTitle">${r.title}</div>
               <div class="resultBody">${r.body}</div>
-              <div style="background:rgba(124,140,255,.1);padding:10px;border-radius:8px;font-size:13px;margin-bottom:15px;white-space:pre-line;">${r.tip}</div>
-              <div style="font-size:14px;font-weight:bold;margin-bottom:10px;color:#eef2ff">${ui.recsHeading}</div>
+              <div style="background:rgba(168,85,247,.12);padding:10px;border-radius:8px;font-size:13px;margin-bottom:15px;white-space:pre-line;border:1px solid rgba(242,239,255,.10);">${r.tip}</div>
+              <div style="font-size:14px;font-weight:bold;margin-bottom:10px;color:var(--v-text);">${ui.recsHeading}</div>
 
               ${list.length ? list.map(x=>`
                 <div class="recCard">
                   <img class="avatar" src="${x.i}">
                   <div style="flex:1; min-width:0;">
                     <div style="font-weight:bold;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${x.n}</div>
-                    <div style="font-size:11px;color:#7c8cff">${x.s}</div>
-                    <div style="font-size:11px;opacity:0.8;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${x.t}</div>
+                    <div style="font-size:11px;color:rgba(168,85,247,.95);">${x.s}</div>
+                    <div style="font-size:11px;opacity:0.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${x.t}</div>
                   </div>
                   <a href="${x.u}" class="ctaBtn">見る</a>
                 </div>
               `).join('') : `
-                <div style="font-size:12px;color:#b8c0dd;opacity:.9;">
+                <div style="font-size:12px;color:var(--v-muted);opacity:.95;">
                   ${ui.loadingRecs}
                 </div>
               `}
@@ -530,6 +578,10 @@
         }
       }
 
+
+      /* ==========================
+         ✅ 回答・戻る・リセット
+         ========================== */
       function choose(idx){
         const sc = questions[state.step].choices[idx].s || {};
         Object.keys(sc).forEach(k => state.score[k] = (state.score[k] || 0) + sc[k]);
@@ -565,11 +617,14 @@
         document.querySelector('.scroll-area').scrollTo(0,0);
       };
 
-      // 初期
+
+      /* ==========================
+         ✅ 初期化
+         ========================== */
       applyUI();
       render();
 
-      // 読み込み（全部GSS）
+      // GSSから読み込み（全部）
       loadQuestionsFromSheet();
       loadRecsFromSheet();
       loadResultsFromSheet();
