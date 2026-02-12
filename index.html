@@ -9,7 +9,8 @@
     html, body {
       height: 100%;
       margin: 0;
-      background: #160b2f;
+      /* アプリの背景色に合わせる */
+      background: #1a103c;
     }
   </style>
 </head>
@@ -19,26 +20,26 @@
 <div id="valentine-scope">
   <style>
     #valentine-scope {
-      --v-bg: #160b2f;
-      --v-bg2: #0f0823;
-      --v-text: #f2efff;
-      --v-muted: rgba(242,239,255,.68);
-      --v-accent1: #a855f7;
-      --v-accent2: #7c3aed;
+      /* ▼ アプリの配色から抽出したカラーパレット */
+      --v-bg: #1a103c;         /* メイン背景 */
+      --v-card-bg: #261b4a;    /* カード背景（少し明るく） */
+      --v-text: #ffffff;       /* 白文字 */
+      --v-muted: #bca4d6;      /* 薄紫の補足文字 */
+      --v-accent1: #7c4dff;    /* アクセント（ボタンなど） */
+      --v-accent2: #a855f7;    /* グラデーション用 */
+      --v-border: rgba(255, 255, 255, 0.2); /* 枠線 */
 
       font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
       color: var(--v-text);
-      background:
-        radial-gradient(900px 520px at 20% 10%, rgba(168,85,247,.35) 0%, rgba(168,85,247,0) 60%),
-        radial-gradient(900px 520px at 80% 25%, rgba(124,58,237,.35) 0%, rgba(124,58,237,0) 55%),
-        linear-gradient(180deg, var(--v-bg) 0%, var(--v-bg2) 100%);
+
+      /* ▼ 背景をフラットに変更（光の演出を削除） */
+      background: var(--v-bg);
 
       position: relative;
       width: 100%;
       height: 100%;
       min-height: 500px;
       margin: 0;
-      border-radius: 12px;
       overflow: hidden;
       isolation: isolate;
       display: flex;
@@ -65,7 +66,9 @@
       justify-content:space-between;
       align-items:flex-start;
       gap:12px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     #valentine-scope .title {
@@ -73,9 +76,8 @@
       font-weight: 700;
       margin:0;
       line-height:1.3;
-      background: linear-gradient(90deg, #fff, rgba(242,239,255,.7));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      /* ▼ グラデーション文字を廃止し、白単色に */
+      color: #fff;
     }
 
     #valentine-scope .subtitle {
@@ -86,11 +88,11 @@
     }
 
     #valentine-scope .chip {
-      border:1px solid rgba(242,239,255,.14);
-      background: rgba(242,239,255,.06);
+      border:1px solid var(--v-border);
+      background: rgba(255,255,255,0.05);
       border-radius: 999px;
-      padding: 4px 8px;
-      font-size: 10px;
+      padding: 4px 10px;
+      font-size: 11px;
       color: var(--v-muted);
       flex-shrink: 0;
       display: inline-block;
@@ -100,85 +102,89 @@
       display:flex;
       align-items:center;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     #valentine-scope .bar {
-      height: 6px;
+      height: 4px;
       border-radius: 999px;
-      background: rgba(242,239,255,.10);
+      background: rgba(255,255,255,0.15);
       flex: 1;
       overflow: hidden;
     }
     #valentine-scope .bar > div {
       height:100%;
-      background: linear-gradient(90deg, var(--v-accent1), var(--v-accent2));
+      background: #fff; /* シンプルな白、またはアクセント色 */
       transition: width .4s ease;
     }
 
     #valentine-scope .card {
-      border: 1px solid rgba(242,239,255,.10);
-      background: linear-gradient(180deg, rgba(120, 60, 230, .18), rgba(20, 10, 50, .25));
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 16px;
+      /* ▼ すりガラスを弱め、アプリのUIパーツに近い質感に */
+      border: none;
+      background: transparent; 
+      padding: 0; 
       animation: val-slideUp .4s ease;
     }
 
     #valentine-scope .q {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
       line-height: 1.5;
+      color: #fff;
     }
 
     #valentine-scope .choiceBtn {
       display:flex;
       align-items:center;
       gap:12px;
-      border:1px solid rgba(242,239,255,.10);
-      background: rgba(242,239,255,.04);
+      
+      /* ▼ アプリの「プロフィール編集」ボタンに合わせてPill型・枠線スタイルに */
+      border: 1px solid var(--v-accent1);
+      background: rgba(124, 77, 255, 0.1);
       color: var(--v-text);
-      padding: 14px;
-      border-radius: 12px;
+      
+      padding: 16px 20px;
+      border-radius: 999px; /* 丸みを強く */
       width: 100%;
       cursor:pointer;
       text-align:left;
       font-size: 14px;
-      margin-bottom: 8px;
+      font-weight: 600;
+      margin-bottom: 12px;
       transition: .2s;
     }
     #valentine-scope .choiceBtn:hover {
-      background: rgba(242,239,255,.08);
+      background: rgba(124, 77, 255, 0.2);
     }
     #valentine-scope .dot {
-      width: 8px; height:8px;
+      width: 10px; height:10px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--v-accent1), var(--v-accent2));
+      background: var(--v-accent1);
       flex-shrink: 0;
+      display: none; /* シンプルにするためドットは隠しても良いが、好みで表示 */
     }
 
     #valentine-scope .resultTitle {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 800;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, rgba(242,239,255,1), rgba(242,239,255,.65));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      color: #fff; /* 単色 */
     }
     #valentine-scope .resultBody {
       font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 16px;
+      line-height: 1.8;
+      margin-bottom: 20px;
       white-space: pre-line;
+      color: rgba(255,255,255,0.9);
     }
 
     #valentine-scope .recCard {
-      border:1px solid rgba(242,239,255,.10);
-      background: rgba(242,239,255,.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--v-card-bg); /* 少し明るい紺色 */
       border-radius: 12px;
-      padding: 10px;
-      margin-bottom: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
       display: flex;
       gap: 12px;
       align-items: center;
@@ -187,21 +193,22 @@
     #valentine-scope .avatar {
       width: 56px;
       height: 56px;
-      border-radius: 999px;
-      background: rgba(242,239,255,0.06);
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
       object-fit: cover;
       object-position: center;
       flex-shrink: 0;
-      border: 1px solid rgba(242,239,255,.12);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     #valentine-scope .ctaBtn {
       display: inline-block;
       text-decoration: none;
-      background: linear-gradient(90deg, var(--v-accent1), var(--v-accent2));
+      /* アプリのボタン色に合わせる */
+      background: var(--v-accent1);
       color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
       font-size: 12px;
       font-weight: bold;
       flex-shrink: 0;
@@ -211,20 +218,20 @@
     #valentine-scope .bottomBar {
       position: absolute;
       left: 0; right: 0; bottom: 0;
-      padding: 12px;
-      background: rgba(15, 8, 35, .92);
-      border-top: 1px solid rgba(242,239,255,.10);
+      padding: 16px;
+      /* アプリのタブバーに近い濃い色 */
+      background: #150c30;
+      border-top: 1px solid rgba(255,255,255,0.1);
       display: flex;
-      gap: 10px;
+      gap: 12px;
       z-index: 10;
-      backdrop-filter: blur(10px);
     }
     #valentine-scope .navBtn {
       flex: 1;
-      border-radius: 10px;
-      padding: 10px;
-      border: 1px solid rgba(242,239,255,.14);
-      background: rgba(242,239,255,.06);
+      border-radius: 8px;
+      padding: 12px;
+      border: none;
+      background: rgba(255,255,255,0.1);
       color: var(--v-text);
       cursor:pointer;
       font-weight: 600;
@@ -233,19 +240,17 @@
     #valentine-scope .navBtn:disabled { opacity: 0.3; }
 
     #valentine-scope .loadingCard{
-      border: 1px solid rgba(242,239,255,.10);
-      background: rgba(242,239,255,.05);
-      border-radius: 16px;
-      padding: 16px;
+      text-align: center;
+      padding-top: 40px;
     }
     #valentine-scope .spinner{
-      width: 18px; height: 18px;
-      border-radius: 999px;
-      border: 2px solid rgba(242,239,255,.22);
-      border-top-color: rgba(242,239,255,.85);
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.2);
+      border-top-color: #fff;
       display:inline-block;
       animation: spin .8s linear infinite;
-      vertical-align: -3px;
+      vertical-align: middle;
       margin-right: 8px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -320,10 +325,9 @@
       function showLoading(){
         app.innerHTML = `
           <div class="loadingCard">
-            <div style="font-size:14px;font-weight:700;margin-bottom:8px;">読み込み中…</div>
             <div style="font-size:12px;color:var(--v-muted);">
               <span class="spinner"></span>
-              コンテンツを準備しています
+              Now Loading...
             </div>
           </div>
         `;
@@ -538,7 +542,7 @@
                 <div class="bar"><div style="width:${pct}%"></div></div>
               </div>
               <div class="q">${q.text}</div>
-              ${q.choices.map((c,i)=>`<button class="choiceBtn" data-idx="${i}"><div class="dot"></div>${c.l}</button>`).join('')}
+              ${q.choices.map((c,i)=>`<button class="choiceBtn" data-idx="${i}">${c.l}</button>`).join('')}
             </div>`;
 
           app.querySelectorAll('.choiceBtn').forEach(b => b.onclick = () => choose(b.dataset.idx));
@@ -551,8 +555,8 @@
             <div class="card">
               <div class="resultTitle">${r.title || ""}</div>
               <div class="resultBody">${r.body || ""}</div>
-              <div style="background:rgba(168,85,247,.12);padding:10px;border-radius:8px;font-size:13px;margin-bottom:15px;white-space:pre-line;border:1px solid rgba(242,239,255,.10);">${r.tip || ""}</div>
-              <div style="font-size:14px;font-weight:bold;margin-bottom:10px;color:var(--v-text);">${ui.recsHeading || "おすすめ"}</div>
+              <div style="background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;font-size:13px;margin-bottom:20px;white-space:pre-line;border:1px solid rgba(255,255,255,0.1);color:var(--v-muted);">${r.tip || ""}</div>
+              <div style="font-size:14px;font-weight:bold;margin-bottom:12px;color:var(--v-text);">${ui.recsHeading || "おすすめ"}</div>
 
               ${list.length ? list.map(x=>`
                 <div class="recCard">
@@ -560,22 +564,20 @@
                   <div style="flex:1; min-width:0;">
                     <div style="font-weight:bold;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${x.n}</div>
 
-                    <!-- ✅ badge：見やすい“チップ表示” -->
                     <div style="
                       display:inline-block;
                       font-size:11px;
-                      padding:2px 6px;
+                      padding:2px 8px;
                       border-radius:999px;
-                      color: rgba(242,239,255,.92);
-                      background: rgba(242,239,255,.10);
-                      border: 1px solid rgba(242,239,255,.12);
-                      margin-top: 2px;
+                      color: rgba(255,255,255,0.9);
+                      background: rgba(255,255,255,0.1);
+                      margin-top: 4px;
                       margin-bottom: 4px;
                     ">
                       ${x.s}
                     </div>
 
-                    <div style="font-size:11px;opacity:0.85;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${x.t}</div>
+                    <div style="font-size:11px;opacity:0.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${x.t}</div>
                   </div>
                   <a href="${x.u}" class="ctaBtn">見る</a>
                 </div>
@@ -623,10 +625,10 @@
         document.querySelector('.scroll-area').scrollTo(0,0);
       };
 
-      // 初期：ローディングだけ（まだ表示しない）
+      // 初期：ローディング
       showLoading();
 
-      // 読み込み開始（揃ったら finishIfReady() で1回だけrender & フェードイン）
+      // 読み込み開始
       loadQuestionsFromSheet();
       loadRecsFromSheet();
       loadResultsFromSheet();
